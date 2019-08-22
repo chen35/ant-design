@@ -19,4 +19,18 @@ describe('BackTop', () => {
     expect(window.pageYOffset).toBe(0);
     scrollToSpy.mockRestore();
   });
+
+  it('could be unmount without error', async () => {
+    const wrapper = mount(<BackTop />);
+    expect(() => {
+      wrapper.unmount();
+    }).not.toThrow();
+  });
+
+  it('support onClick', async () => {
+    const onClick = jest.fn();
+    const wrapper = mount(<BackTop onClick={onClick} />);
+    wrapper.find('.ant-back-top').simulate('click');
+    expect(onClick).toHaveBeenCalled();
+  });
 });
